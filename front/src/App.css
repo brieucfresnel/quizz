@@ -1,38 +1,115 @@
-.App {
-  text-align: center;
+body {
+    background: rgba(31, 38, 42, 0.85);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.icon {
+    width: 30px;
+    height: auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* TOP BAR */
+
+.top-bar {
+    padding: 1.2rem 0;
+    position: relative;
+    background: linear-gradient(103.27deg, #FC6076 -29.57%, #FF9A44 129.19%);
+    border-radius: 0px 0px 40px 40px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.top-bar h1, .top-bar .icon {
+    display: inline-block;
 }
 
-.App-link {
-  color: #61dafb;
+.top-bar h1 {
+    width: 100%;
+    margin: 0;
+    font-size: 1.4rem;
+    text-align: center;
+    margin-top: .1rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.top-bar .icon {
+    float: right;
+    position: absolute;
+    right: 2rem;
+}
+
+/* QUIZZ THUMBNAILS */
+
+.quizzThumbnails {
+    margin: 1.8rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+}
+
+/* .quizzThumbnail-border {
+    background-image: linear-gradient(103.27deg, #FC6076 -29.57%, #FF9A44 129.19%);
+    padding: 2px;
+} */
+
+.quizzThumbnail-border {
+    background-image: linear-gradient(103.27deg, #FC6076 -29.57%, #FF9A44 129.19%);
+    padding: 2px;
+    border-radius: 15px;
+}
+
+.quizzThumbnail {
+    background: #111;
+    padding: 1rem;
+    border-radius: 15px;
+    color: #fff;
+}
+
+.quizzThumbnail-rating {
+    margin-top: .5rem;
+    display: flex;
+}
+
+.rating-elt {
+    width: 15px;
+    height: 15px;
+    border-radius: 50% 50%;
+    background: #999;
+    margin-left: .3rem;
+}
+
+.rating-elt.active {
+    background: #FD6151;
+}
+
+.rating-elt:first-child {
+    margin-left: 0;
+}
+
+.quizzThumbnail-creator {
+    margin-top: 6rem;
+    text-align: right;
+}
+
+/* BOT BAR */
+.bot-bar {
+    position: fixed;
+    bottom: 0;
+    left: 1rem;
+    right: 1rem;
+
+    background: rgba(31, 38, 42, 0.85);
+    border-radius: 40px 40px 0px 0px;
+    display: flex;
+    justify-content: space-between;
+    padding:.5rem 6rem 0 6rem;
+}
+
+.control-btn {
+    position: relative;
+    top: -2rem;
+    background: linear-gradient(103.27deg, #FC6076 -29.57%, #FF9A44 129.19%);
+    border-radius: 50% 50%;
+    padding: 1rem 1.2rem;
+}
+
+.control-btn-icon {
+    height: 20px;
+    width: 20px;
 }
