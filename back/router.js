@@ -2,11 +2,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const router = express.Router();
 const sqlite3 = require('sqlite3').verbose();
-
-const db = new sqlite3.Database('db/quizz');
+const quizz = require('./db_function/quizz.js');
+console.log(quizz);
+const db = new sqlite3.Database('./db/quizz');
 
 module.exports = router;
-let resetDB = false; // Set this to true to reset database data
 
 /*
 * Middleware
@@ -18,33 +18,88 @@ router
     extended: true
 }));
 
-/*
-* GET requests
-*/
-
 router.get("/", (req, res) => {
-   res.json("Hello world!");
+  res.json("Hello world!");
 });
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////// Quizz /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Quizz List //
 router.get("/quizzes", (req, res) => {
-    db.all( "SELECT * FROM quizz", (err, rows) => {
-        res.json(rows);
-    });
+  quizz.list(req, res);
 });
 
-router.get('/quiz/:id', (req, res) => {
-    db.get(
-        "SELECT * FROM quizz WHERE id=?",
-        req.params.id,
-        (err, row) => {
-            res.json(row)
-        }
-    );
+// Particular Quizz Informations //
+router.get('/quizz_info/:id', (req, res) => {
+  quizz.info(req, res);
 });
 
-/*
-* POST, UPDATE, DELETE requests
-*/
+// Quizz Questions //
+router.get('/quizz/:id', (req, res) => {
+  quizz.questions(req, res);
+});
+
+// Quizz Answers //
+router.get('answers/:id', (req, res) => {
+  quizz.answers(req, res);
+});
+
+// Create Quizz //
+router.post('/quizz',(req, res) => {
+  quizz.create(req, res);
+});
+
+// Create question //
+router.post('/question',(req, res) => {
+    quizz.create_question(req, res);
+});
+
+// Create answers //
+router.post('/answers',(req, res) => {
+    quizz.create_answers(req, res);
+});
+
+// Delete Quizz //
+router.delete('/quizz/:id', (req, res) => {
+    quizz.drop(req, res);
+});
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////// Scores /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// router.get('/scores', (req, res) => { ////////////////////////////// All scores //////////////////////////////
+//   db.get(
+//     "SELECT * FROM scores",
+//     (err, row) => {
+//       res.json(row)
+//     }
+//   );
+// });
+//
+// router.get('/scores/:id', (req, res) => { ////////////////////////////// Scores of a particular quizz //////////////////////////////
+//   db.get(
+//     "SELECT * FROM scores WHERE quizz_id=?",
+//     req.params.id,
+//     (err, row) => {
+//       res.json(row)
+//     }
+//   );
+// });
+//
+// router.post('/score', (req, res) => { ////////////////////////////// Add Score //////////////////////////////
+//   db.run("INSERT INTO scores (user_id,quizz_id,score) VALUES(?,?,?)", [req.body.quizz_id, req.body.user_id, req.body.score]);
+//   res.send('Score Added');
+// });
+//
+//
+//
+// router.delete('/quizz/:id', (req, res) => {
+//     db.run('DELETE FROM person WHERE id=?', [req.params.id]);
+//     res.redirect(303, "/");
+// });
 
 router.post('/upload', (req, res) => {
     if (!req.files)
@@ -65,15 +120,7 @@ router.post('/upload', (req, res) => {
     });
 })
 
-router.post('/quizz',(req, res) => {
-    db.run("INSERT INTO quizz (creator_id, name, picture_url, category, difficulty, creation_date) VALUES(?,?,?,?,?,?)", [req.body.creator_id, req.body.name, req.body.picture_url, req.body.category, rel.body.difficulty, rel.body.creation_date]);
-    res.redirect(303, '/quizzes');
-});
 
-router.delete('/quizzes/:id', (req, res) => {
-    db.run('DELETE FROM person WHERE id=?', [req.params.id]);
-    res.redirect(303, "/quizz");
-});
 
 /*
 * 400 Errors handling
