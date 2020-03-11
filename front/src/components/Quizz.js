@@ -9,12 +9,30 @@ import QuizzLauncher from './QuizzLauncher';
 export default function Quizz(props) {
     let [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     let [selectedAnswer, setSelectedAnswer] = useState(false);
+    let [answers, setAnswers] = useState([]);
+    let isQuizzFinished = false;
 
-    let currentQuestion = props.questions[currentQuestionIndex];
-    let questionsCount = props.questions.length;
+    let currentQuestion = {};
+
+    let questionsCount = 0;
+    let questions = {};
+
+    if(props.questions!==undefined) {
+        questions = props.questions;
+        currentQuestion = props.questions[currentQuestionIndex];
+        questionsCount = props.questions.length;
+    }
+
 
     function nextQuestion() {
         setCurrentQuestionIndex(currentQuestionIndex+1);
+
+        if (currentQuestionIndex <= questionsCount) {
+            let tmp = answers;
+            tmp.push(selectedAnswer);
+            setAnswers(tmp);
+            console.log(answers);
+        }
     }
 
     function selectAnswer(e) {
@@ -26,19 +44,32 @@ export default function Quizz(props) {
         e.target.className="selected";
     }
 
-    return (
-        <div className="quizz-wrapper launched">
-            <TopBar/>
+    if(currentQuestionIndex == questionsCount) {
+        isQuizzFinished = true;
+    }
 
-            <div className="quizz">
-                <Question questions={props.questions} key={currentQuestion.id} id={currentQuestion.id} selectAnswer={selectAnswer} count={questionsCount} index={currentQuestionIndex} sentence={currentQuestion.sentence} number={currentQuestion.number} answers={currentQuestion.answers}/>
+    if(isQuizzFinished) {
+        return (
+            <div>
+                Quizz is finished  !<br/>
+                Chosen answers: {answers}
             </div>
+        );
+    } else {
+        return (
+            <div className="quizz-wrapper launched">
+                <TopBar/>
 
-            <div className="bot-bar">
-                <div className="control-btn" onClick={nextQuestion}>
-                    SUIVANT
+                <div className="quizz">
+                    <Question questions={questions} key={currentQuestion.id} id={currentQuestion.id} selectAnswer={selectAnswer} count={questionsCount} index={currentQuestionIndex} sentence={currentQuestion.sentence} number={currentQuestion.number} answers={currentQuestion.answers}/>
+                </div>
+
+                <div className="bot-bar">
+                    <div className="control-btn" onClick={nextQuestion}>
+                        SUIVANT
+                    </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
