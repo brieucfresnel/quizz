@@ -12,14 +12,14 @@ const db = new sqlite3.Database('./db/quizz');
 
 // Quizz List //
 function list(req, res){
-  db.all( "SELECT * FROM quizz", (err, rows) => {
+  db.all( "SELECT * FROM quizz JOIN (SELECT votes.quizz_id, AVG(votes.vote) FROM votes GROUP BY votes.quizz_id) ON quizz_id = quizz.id", (err, rows) => {
     res.json(rows);
   });
 }
 
 // Particular Quizz Informations //
 function info(req, res){
-  db.all('SELECT * FROM quizz LEFT JOIN scores ON scores.quizz_id = quizz.id WHERE quizz.id=?', [req.params.id] , (err, rows) => {
+  db.all('SELECT * FROM quizz JOIN (SELECT votes.quizz_id, AVG(votes.vote) FROM votes GROUP BY votes.quizz_id) ON quizz_id = quizz.id WHERE quizz.id=?', [req.params.id] , (err, rows) => {
     if (err) {
       res.json(err);
     }
@@ -49,10 +49,10 @@ function answers(req, res){
 
 // Create Quizz //
 function create(req, res){
-  if ( req.body.name ){
+  if ( req.body.creator_id && req.body.naem && req.body.picture_url && req.body.category && req.body.dificulty){
     db.run(
       "INSERT INTO quizz (creator_id, name, picture_url, category, difficulty, creation_date) VALUES (?,?,?,?,?,?)",
-      [req.body.creator_id, req.body.name, req.body.picture_url, req.body.category, req.body.difficulty, req.body.creation_date],
+      [req.body.creator_id, req.body.name, req.body.picture_url, req.body.category, req.body.difficulty, 0],
       function(err){
         if (err) {
           res.json(err.message);
@@ -107,6 +107,29 @@ function create_answers(req, res){
   res.json('ok!');
 }
 
+// Delete Answer//
+function drop_answer(req, res){
+  db.run(
+    'DELETE FROM answers WHERE question_id IN (SELECT id FROM questions WHERE quizz_id = ?)',
+    [req.params.id],
+  );
+  res.json('ok!');
+}
+
+// Delete Question //
+function drop_question(req, res){
+  db.run(
+    'DELETE FROM answers WHERE question_id IN (SELECT id FROM questions WHERE quizz_id = ?)',
+    [req.params.id],
+    function(rows,err){
+      db.run(
+        'DELETE FROM questions WHERE quizz_id = ?',
+        [req.params.id],
+      );
+    }
+  );
+  res.json('ok!');
+}
 
 // Delete Quizz //
 function drop(req, res){
@@ -120,4 +143,4 @@ function drop(req, res){
   );
 }
 
-module.exports = {list,info,questions,answers,create,drop,create_question,create_answers};
+module.exports = {list,info,questions,answers,create,drop,drop_question,drop_answer,create_question,create_answers};
