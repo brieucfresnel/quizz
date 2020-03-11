@@ -26,10 +26,15 @@ export default function QuizzManager(props) {
         getQuizzInfo();
     }, []);
 
+    let quizzName = "Loading...";
+    
+    if(quizzInfo.length > 0) {
+        quizzName = quizzInfo[0].name;
+    }
+
     if(!showQuizz) {
-        console.log(quizzInfo);
         return (
-            <QuizzLauncher setShowQuizz={setShowQuizz} quizzInfo={quizzInfo}/>
+            <QuizzLauncher quizzName={quizzName} quizzInfo={quizzInfo} setShowQuizz={setShowQuizz}/>
         );
     } else {
         return (

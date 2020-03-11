@@ -25,8 +25,6 @@ export default function Quizz(props) {
         })
         e.target.className="selected";
     }
-    console.log(props.questions);
-    
 
     return (
         <div className="quizz-wrapper launched">

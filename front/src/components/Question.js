@@ -3,7 +3,7 @@ import React from 'react';
 export default function Question(props) {
     return(
         <div className="quizz-question">
-            <div className="quizz-question-number">Question <span>{props.index}/{props.count}</span></div>
+            <div className="quizz-question-number">Question <span>{props.index+1}/{props.count}</span></div>
             <h1 className="quizz-question-sentence">{props.sentence}</h1>
             <ul className="quizz-answers">
                 <li id="answer_1" onClick={(e) => props.selectAnswer(e)}>Réponse A</li>

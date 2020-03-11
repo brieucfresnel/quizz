@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import TopBar from './TopBar';
 import BotBar from './BotBar';
 
 export default function QuizzLauncher(props) {
+
     return (
         <div className="quizz-wrapper">
             <div className="quizz-header" onClick={(e) => props.setShowQuizz(true)}>
@@ -28,7 +29,7 @@ export default function QuizzLauncher(props) {
             </div>
 
             <div className="quizz-info">
-                <h1 className="quizz-name">{props.quizzInfo.name}</h1>
+                <h1 className="quizz-name">{props.quizzName}</h1>
                 <div className="quizz-author">Créé par {props.quizzInfo.creator_id}</div>
             </div>
 
