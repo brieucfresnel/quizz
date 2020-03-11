@@ -20,7 +20,7 @@ CREATE TABLE quizz (
 
 CREATE TABLE questions (
   id INTEGER NOT NULL PRIMARY KEY,
-  quizzes_id INTEGER REFERENCES quizzes(id),
+  quizz_id INTEGER REFERENCES quizz(id),
   sentence TEXT NOT NULL,
   video_url TEXT,
   score INTEGER,
@@ -29,7 +29,7 @@ CREATE TABLE questions (
 
 CREATE TABLE answers (
   id INTEGER NOT NULL PRIMARY KEY,
-  questions_id INTEGER REFERENCES questions(id),
+  question_id INTEGER REFERENCES questions(id),
   sentence TEXT,
   picture_url TEXT check((sentence IS NULL AND picture_url IS NOT NULL) OR (sentence IS NOT NULL AND picture_url IS NULL)),
   solution INTEGER check(solution in (0,1))
@@ -73,12 +73,12 @@ INSERT INTO quizz (creator_id, name, picture_url,category, difficulty, creation_
 VALUES
    (0, "Test", "Aix/aix.jpg", 0, 1, 1583763011);
 
-INSERT INTO questions (quizzes_id, sentence, video_url, score, category)
+INSERT INTO questions (quizz_id, sentence, video_url, score, category)
 VALUES
    (1, "where is brian?", NULL, 1, 1),
    (1, "who is brian?", NULL, 1, 1);
 
-INSERT INTO answers (questions_id, sentence, picture_url, solution)
+INSERT INTO answers (question_id, sentence, picture_url, solution)
 VALUES
    (1, "in the living room", NULL, 0),
    (1, "in the kitchen", NULL, 1),
