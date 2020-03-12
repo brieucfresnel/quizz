@@ -4,12 +4,15 @@ const app = express();
 const port = process.env.PORT || 8000;
 const cors = require('cors');
 const morgan = require('morgan');
+const bodyParser = require("body-parser");
 
-app.use(express.static('/public/'));
-
+app.use(express.static('/public'));
 
 app.use(morgan('combined')); // to get informations from requests
 app.use(cors()); // to allow resquets from another application
+app.use(bodyParser.urlencoded({
+        extended: true
+    }));
 
 app.use(router) // Requests processing will be defined in the file router
     .listen(port, () => console.log('Server app listening on port ' + port));
