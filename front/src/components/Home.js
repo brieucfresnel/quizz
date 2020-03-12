@@ -35,7 +35,8 @@ export default function Home(props) {
             name={quizz.name}
             creator_id={quizz.creator_id}
             category={quizz.category}
-            creation_date={quizz.creation_date}/>
+            creation_date={quizz.creation_date}
+            picture_url={quizz.picture_url}/>
         );
 
     return (

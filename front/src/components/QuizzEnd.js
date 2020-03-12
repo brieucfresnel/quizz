@@ -5,7 +5,6 @@ import TopBar from './TopBar';
 import BotBar from './BotBar';
 
 export default function QuizzEnd(props) {
-    console.log(props);
     return (
         <div className="quizz-end-wrapper">
             <div className="quizz-header">

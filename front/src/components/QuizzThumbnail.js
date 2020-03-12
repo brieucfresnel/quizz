@@ -1,12 +1,13 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {HTTP_SERVER_PORT_PICTURES} from '../constants.js';
 
 export default function QuizzThumbnail(props) {
-
+    let bgImage = HTTP_SERVER_PORT_PICTURES + props.picture_url;
     return (
         <Link to={'/quizz/'+props.id} style={{ textDecoration: 'none' }}>
             <div className="quizzThumbnail-border">
-                <div className="quizzThumbnail">
+                <div className="quizzThumbnail" style={{backgroundImage: 'url('+bgImage+')'}}>
                     <div className="quizzThumbnail-name">{props.name}</div>
                     <div className="quizz-rating">
                         <div className="rating-elt active"></div>

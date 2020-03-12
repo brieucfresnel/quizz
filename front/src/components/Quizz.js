@@ -69,7 +69,6 @@ export default function Quizz(props) {
     }
 
     if(isQuizzFinished) {
-        console.log(props.quizzInfo[0]);
         return (
             <QuizzEnd quizzID={props.quizzInfo[0].quizz_id} quizzName={props.quizzInfo[0].name} />
         );
