@@ -33,7 +33,14 @@ export default function NewQuizzForm(props) {
             // choose question type: video or text
             return (
                 <div className="newQuizzForm">
-
+                    <h1>Vos questions</h1>
+                    <div className="choose-questionType">
+                        <div>Quel type de question souhaitez-vous ajouter ?</div>
+                        <div className="questionType-block">
+                            <div>Question textuelle</div>
+                            <img src={process.env.PUBLIC_URL + "/img/icons/icon_search.png"}/>
+                        </div>
+                    </div>
                 </div>
             );
             break;
@@ -41,7 +48,7 @@ export default function NewQuizzForm(props) {
             // input question, choose answer type
             return (
                 <div className="newQuizzForm">
-
+                    <h1>Question 1</h1>
                 </div>
             );
             break;
@@ -49,7 +56,7 @@ export default function NewQuizzForm(props) {
             // show question, fill answers, choose rightAnswer
             return (
                 <div className="newQuizzForm">
-
+                    <h1>Question 1</h1>
                 </div>
             );
             break;
@@ -57,7 +64,7 @@ export default function NewQuizzForm(props) {
             // show question, upload images, choose rightAnswer
             return (
                 <div className="newQuizzForm">
-
+                    <h1>Question 1</h1>
                 </div>
             );
             break;
