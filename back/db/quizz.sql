@@ -76,14 +76,14 @@ INSERT INTO users (login, password, picture_url, remember)
 VALUES
    ("ADMIN", "ADMIN", "", 0);
 
-INSERT INTO vote (user_id, quizz_id, vote)
+INSERT INTO votes (user_id, quizz_id, vote)
 VALUES
   (1, 1, 2.5),
   (1, 2, 2.5),
   (1, 3, 2.5),
   (1, 4, 2.5);
 
-INSERT INTO score (quizz_id, user_id,  score)
+INSERT INTO scores (quizz_id, user_id,  score)
   VALUES
     (1, 1, 5),
     (2, 1, 5),
