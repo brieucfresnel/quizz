@@ -12,14 +12,14 @@ const db = new sqlite3.Database('./db/quizz');
 
 // Quizz List //
 function list(req, res){
-  db.all( "SELECT * FROM quizz JOIN (SELECT votes.quizz_id, AVG(votes.vote) FROM votes GROUP BY votes.quizz_id) ON quizz_id = quizz.id", (err, rows) => {
+  db.all( "SELECT * FROM quizz LEFT JOIN (SELECT votes.quizz_id, AVG(votes.vote) FROM votes GROUP BY votes.quizz_id) ON quizz_id = quizz.id", (err, rows) => {
     res.json(rows);
   });
 }
 
 // Particular Quizz Informations //
 function info(req, res){
-  db.all('SELECT * FROM quizz JOIN (SELECT votes.quizz_id, AVG(votes.vote) FROM votes GROUP BY votes.quizz_id) ON quizz_id = quizz.id WHERE quizz.id=?', [req.params.id] , (err, rows) => {
+  db.all('SELECT * FROM quizz LEFT JOIN (SELECT votes.quizz_id, AVG(votes.vote) FROM votes GROUP BY votes.quizz_id) ON quizz_id = quizz.id WHERE quizz.id=?', [req.params.id] , (err, rows) => {
     if (err) {
       res.json(err);
     }
@@ -49,7 +49,7 @@ function answers(req, res){
 
 // Create Quizz //
 function create(req, res){
-  if ( req.body.creator_id && req.body.naem && req.body.picture_url && req.body.category && req.body.dificulty){
+  if (req.body.name){
     db.run(
       "INSERT INTO quizz (creator_id, name, picture_url, category, difficulty, creation_date) VALUES (?,?,?,?,?,?)",
       [req.body.creator_id, req.body.name, req.body.picture_url, req.body.category, req.body.difficulty, 0],
@@ -61,7 +61,7 @@ function create(req, res){
     );
     res.json("Quizz "+ req.body.name +" crée");
   }else{
-    res.json("Pas de name " + req.body.name);
+    res.json("Il manque un parametre");
   }
 }
 
