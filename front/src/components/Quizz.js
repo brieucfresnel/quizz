@@ -55,7 +55,8 @@ export default function Quizz(props) {
         for (let i = 0 ; i < rightAnswers.length ; i++) { // check matches with user answers
 
         }
-
+        console.log(rightAnswers);
+        console.log(userAnswers);
         // calculate score
     }
 
