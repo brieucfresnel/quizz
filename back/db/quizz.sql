@@ -75,10 +75,10 @@ VALUES
 
 INSERT INTO quizz (creator_id, name, picture_url,category, difficulty, creation_date)
 VALUES
-   (0, "C'est quoi le webdesign ?","Aix/aix.jpg", 0, 1, 0),
-   (0, "Les bases du motion design ?","Aix/aix.jpg", 1, 1, 0),
-   (0, "C'est quoi le game design ?","Aix/aix.jpg", 2, 1, 0),
-   (0, "Les bases du print.","Aix/aix.jpg", 3, 1, 0);
+   (0, "C'est quoi le webdesign ?","quizz01.jpg", 0, 1, 0),
+   (0, "Les bases du motion design ?","quizz01.jpg", 1, 1, 0),
+   (0, "C'est quoi le game design ?","quizz01.jpg", 2, 1, 0),
+   (0, "Les bases du print.","quizz01.jpg", 3, 1, 0);
 
 INSERT INTO questions (quizz_id, sentence, video_url, score, category)
 VALUES
@@ -103,6 +103,8 @@ VALUES
    (4, "Lequel de ces produits est issu du print ?", NULL, 1, 3),
    (4, " Le premier livre imprimé en France ", NULL, 1, 3),
    (4, "L’ancêtre de l’imprimerie ?", NULL, 1, 3);
+
+
 
 INSERT INTO answers (question_id, sentence, picture_url, solution)
 VALUES
@@ -187,4 +189,3 @@ VALUES
    (20, "Le téléphone", NULL, 0),
    (20, "Le numérique", NULL, 0),
    (20, "Les réseaux sociaux", NULL, 0);
-
