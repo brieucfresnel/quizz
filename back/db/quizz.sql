@@ -78,10 +78,10 @@ VALUES
 
 INSERT INTO votes (user_id, quizz_id, vote)
 VALUES
-  (1, 1, 3),
-  (1, 2, 1),
-  (1, 3, 5),
-  (1, 4, 2);
+  (1, 1, 2.5),
+  (1, 2, 2.5),
+  (1, 3, 2.5),
+  (1, 4, 2.5);
 
 INSERT INTO scores (quizz_id, user_id,  score)
   VALUES

@@ -3,8 +3,6 @@ import React, {useState} from 'react';
 export default function NewQuizzForm(props) {
 
     let [currPageTitle, setCurrPageTitle] = useState('quizzInfo');
-    let [questions, setQuestions] = useState([]);
-    let [answers, setAnswers] = useState([]);
     let pageToShow = '';
 
     switch(currPageTitle) {
@@ -35,7 +33,7 @@ export default function NewQuizzForm(props) {
             // choose question type: video or text
             return (
                 <div className="newQuizzForm">
-                    <h1>Quel type de questions souhaitez-vous ajouter ?</h1>
+
                 </div>
             );
             break;
@@ -43,10 +41,7 @@ export default function NewQuizzForm(props) {
             // input question, choose answer type
             return (
                 <div className="newQuizzForm">
-                    <div className="questionSlot">Votre question: currentQuestion</div>
-                    <h1>Quel type de réponses souhaitez-vous ajouter ?</h1>
-                    <div className="">
-                    </div>
+
                 </div>
             );
             break;
@@ -54,7 +49,7 @@ export default function NewQuizzForm(props) {
             // show question, fill answers, choose rightAnswer
             return (
                 <div className="newQuizzForm">
-                    <h1></h1>
+
                 </div>
             );
             break;
