@@ -93,10 +93,10 @@ INSERT INTO scores (quizz_id, user_id,  score)
 
 INSERT INTO quizz (creator_id, name, picture_url,category, difficulty, creation_date)
 VALUES
-   (1, "C'est quoi le webdesign ?","quizz01.jpg", 0, 1, 0),
-   (1, "Les bases du motion design ?","quizz01.jpg", 1, 1, 0),
-   (1, "C'est quoi le game design ?","quizz01.jpg", 2, 1, 0),
-   (1, "Les bases du print.","quizz01.jpg", 3, 1, 0);
+  (1, "C'est quoi le webdesign ?","webdesign.jpg", 0, 1, 0),
+  (1, "Les bases du motion design ?","motiondesign.jpg", 1, 1, 0),
+  (1, "C'est quoi le game design ?","gamedesign.jpg", 2, 1, 0),
+  (1, "Les bases du print.","print.jpg", 3, 1, 0);
 
 INSERT INTO questions (quizz_id, sentence, video_url, score, category)
 VALUES
