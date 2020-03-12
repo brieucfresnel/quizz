@@ -51,11 +51,6 @@ export default function Home(props) {
 
             <div className="quizzThumbnails">
                 {jsxQuizzesThumbnails}
-                {jsxQuizzesThumbnails}
-                {jsxQuizzesThumbnails}
-                {jsxQuizzesThumbnails}
-                {jsxQuizzesThumbnails}
-                {jsxQuizzesThumbnails}
             </div>
 
             <BotBar/>

@@ -10,11 +10,14 @@ export default function NewQuizzForm(props) {
             return (
                 <div className="newQuizzForm">
                     <h1>Créez votre propre quizz</h1>
-                    <form>
+                    <form className="quizzInfoForm">
                         <input type="text" name="quizzName" required/>
                         <input type="file" name="quizzImage" required/>
                         <select name="quizzCategory" required>
-                            <option value="webdesign">
+                            <option value="webdesign">Web Design</option>
+                            <option value="webdesign">Motion Design</option>
+                            <option value="webdesign">Game Design</option>
+                            <option value="webdesign">Print</option>
                         </select>
                     </form>
                 </div>
