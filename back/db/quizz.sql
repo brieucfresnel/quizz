@@ -104,8 +104,6 @@ VALUES
    (4, " Le premier livre imprimé en France ", NULL, 1, 3),
    (4, "L’ancêtre de l’imprimerie ?", NULL, 1, 3);
 
-
-
 INSERT INTO answers (question_id, sentence, picture_url, solution)
 VALUES
    (1, "Survoler et dessiner", NULL, 0),
@@ -189,3 +187,4 @@ VALUES
    (20, "Le téléphone", NULL, 0),
    (20, "Le numérique", NULL, 0),
    (20, "Les réseaux sociaux", NULL, 0);
+
