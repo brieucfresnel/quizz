@@ -26,12 +26,9 @@ body {
     margin: 0 2rem;
 }
 
-.top-bar h1{
+.top-bar h1 {
     display: inline-block;
     color: #000;
-}
-
-.top-bar h1 {
     width: 100%;
     margin: 0;
     font-size: 1.4rem;
@@ -416,6 +413,16 @@ body {
     color: #fff;
 }
 
+.newQuizzForm .top-bar h1 {
+    display: inline-block;
+    color: #000;
+    width: 100%;
+    margin: 0;
+    font-size: 1.4rem;
+    text-align: center;
+    margin-top: .1rem;
+}
+
 .quizzCategory {
     color:#FD6151;
     padding: .5rem;
@@ -445,6 +452,7 @@ body {
     margin-left: 1rem;
     border-radius: 15px;
     font-size: 1.2rem;
+    cursor: pointer;
 }
 
 .newQuizzForm .questionType-block img {
@@ -455,4 +463,43 @@ body {
 
 .newQuizzForm .questionType-block:first-child {
     margin-left: 0.
+}
+
+.newQuizzForm-info {
+    text-align: center;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 2rem 0;
+}
+
+.newQuizzForm-answer-container {
+    display: flex;
+    align-items: center;
+}
+
+.newQuizzForm-answer {
+    background: rgba(31, 38, 42, 0.85);
+    border-radius: 15px;
+    border: 2px solid #FF9A44;
+    padding: 0.5rem 0.8rem;
+    color: #fff;
+}
+
+.newQuizzForm-answer:focus {
+    outline-width: 0;
+}
+
+.newQuizzForm input[type="checkbox"] {
+    -webkit-appearance: none;
+    border-radius: 50% 50%;
+    border: 2px solid #FF9A44;
+    padding: .5rem;
+    width:2rem;
+    height:2rem;
+    background: rgba(31, 38, 42, 0.85);
+}
+
+.newQuizzForm input[type="checkbox"]:checked {
+    background: #FF9A44;
 }
