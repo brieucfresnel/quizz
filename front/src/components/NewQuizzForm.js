@@ -20,6 +20,11 @@ export default function NewQuizzForm(props) {
                             <option value="webdesign">Print</option>
                         </select>
                     </form>
+                    <div className="bot-bar">
+                        <div className="control-btn">
+                            SUIVANT
+                        </div>
+                    </div>
                 </div>
             );
             break;
@@ -65,9 +70,4 @@ export default function NewQuizzForm(props) {
             );
             break;
     }
-    return (
-        <div className="newQuizzForm">
-            {jsxPageToShow}
-        </div>
-    );
 }
