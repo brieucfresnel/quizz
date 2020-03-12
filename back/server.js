@@ -7,6 +7,7 @@ const morgan = require('morgan');
 
 app.use(express.static('/public/'));
 
+
 app.use(morgan('combined')); // to get informations from requests
 app.use(cors()); // to allow resquets from another application
 
