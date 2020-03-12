@@ -69,6 +69,10 @@ VALUES
    ("Game Design"),
    ("Print");
 
+INSERT INTO users (login, password, picture_url, remember)
+VALUES
+   ("ADMIN", "ADMIN", "", 0);
+
 INSERT INTO quizz (creator_id, name, picture_url,category, difficulty, creation_date)
 VALUES
    (0, "C'est quoi le webdesign ?","Aix/aix.jpg", 0, 1, 0),
@@ -99,8 +103,6 @@ VALUES
    (4, "Lequel de ces produits est issu du print ?", NULL, 1, 3),
    (4, " Le premier livre imprimé en France ", NULL, 1, 3),
    (4, "L’ancêtre de l’imprimerie ?", NULL, 1, 3);
-   
-   
 
 INSERT INTO answers (question_id, sentence, picture_url, solution)
 VALUES
@@ -185,6 +187,4 @@ VALUES
    (20, "Le téléphone", NULL, 0),
    (20, "Le numérique", NULL, 0),
    (20, "Les réseaux sociaux", NULL, 0);
-   
-   
 
