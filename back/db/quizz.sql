@@ -20,7 +20,7 @@ CREATE TABLE quizz (
 
 CREATE TABLE questions (
   id INTEGER NOT NULL PRIMARY KEY,
-  quizz_id INTEGER REFERENCES quizz(id),
+  quizz_id INTEGER,
   sentence TEXT NOT NULL,
   video_url TEXT,
   score INTEGER,
@@ -29,7 +29,7 @@ CREATE TABLE questions (
 
 CREATE TABLE answers (
   id INTEGER NOT NULL PRIMARY KEY,
-  question_id INTEGER REFERENCES questions(id),
+  question_id INTEGER,
   sentence TEXT,
   picture_url TEXT check((sentence IS NULL AND picture_url IS NOT NULL) OR (sentence IS NOT NULL AND picture_url IS NULL)),
   solution INTEGER check(solution in (0,1))
@@ -50,15 +50,15 @@ CREATE TABLE users (
 
 CREATE TABLE votes (
   id INTEGER NOT NULL PRIMARY KEY,
-  user_id INTEGER REFERENCES user(id),
-  quizz_id INTEGER REFERENCES quizz(id),
-  vote INTEGER check(vote in (1,5))
+  user_id INTEGER,
+  quizz_id INTEGER,
+  vote INTEGER check(vote in (1,2,3,4,5))
 );
 
 CREATE TABLE scores (
   id INTEGER NOT NULL PRIMARY KEY,
-  user_id INTEGER REFERENCES user(id),
-  quizz_id INTEGER REFERENCES quizz(id),
+  user_id INTEGER,
+  quizz_id INTEGER,
   score INTEGER
 );
 
