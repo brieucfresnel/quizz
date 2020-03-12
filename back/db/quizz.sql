@@ -93,10 +93,17 @@ INSERT INTO scores (quizz_id, user_id,  score)
 
 INSERT INTO quizz (creator_id, name, picture_url,category, difficulty, creation_date)
 VALUES
+<<<<<<< HEAD
+(1, "C'est quoi le webdesign ?","/quizz/webdesign.jpg", 0, 1, 0),
+(1, "Les bases du motion design ?","/quizz/motiondesign.jpg", 1, 1, 0),
+(1, "C'est quoi le game design ?","/quizz/gamedesign.jpg", 2, 1, 0),
+(1, "Les bases du print.","/quizz/print.jpg", 3, 1, 0);
+=======
   (1, "C'est quoi le webdesign ?","webdesign.jpg", 0, 1, 0),
   (1, "Les bases du motion design ?","motiondesign.jpg", 1, 1, 0),
   (1, "C'est quoi le game design ?","gamedesign.jpg", 2, 1, 0),
   (1, "Les bases du print.","print.jpg", 3, 1, 0);
+>>>>>>> ddb4817d6afcf46f8bfa1837534a614231ddfdba
 
 INSERT INTO questions (quizz_id, sentence, video_url, score, category)
 VALUES
@@ -147,8 +154,8 @@ VALUES
    (5, "Hameçonnage", NULL, 0),
    (5, "SQL", NULL, 0),
 
-   (6, NULL, "Aix/elon.jpg", 0),
-   (6, NULL, "Aix/saul.jpg", 1),
+   (6, NULL, "answers/musc.jpg", 0),
+   (6, NULL, "answers/saul.jpg", 1),
    (7, "Adobe After Effects", NULL, 1),
    (7, "Adobe Photoshop", NULL, 0),
    (7, "Visual Studio Code", NULL, 0),
