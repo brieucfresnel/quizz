@@ -1,4 +1,3 @@
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const router = express.Router();
@@ -12,8 +11,15 @@ const db = new sqlite3.Database('./db/quizz');
 
 // get user info //
 function profile(req, res) {
-  db.get( "SELECT * FROM users", (err, rows) => {
+  db.get( "SELECT * FROM users WHERE id = ?", [req.params.id], (err, rows) => {
     res.json(rows);
   });
 }
-module.exports = {};
+
+// Add user //
+function add(req, res) {
+  db.run( "INSERT INTO users (login, password, picture_url, remember) VALUES (?,?,?,NULL)", [req.body.login,req.body.password,req.body.picture_url]);
+  res.json('ok!');
+}
+
+module.exports = {profile, add};
