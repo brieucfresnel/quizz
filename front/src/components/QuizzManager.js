@@ -10,6 +10,7 @@ import Quizz from './Quizz';
 export default function QuizzManager(props) {
 
     let [questions, setQuestions] = useState({});
+    let [answers, setAnswers] = useState([]);
     let [quizzInfo, setQuizzInfo] = useState({});
     let [showQuizz, setShowQuizz] = useState(false);
 
@@ -21,13 +22,18 @@ export default function QuizzManager(props) {
         setQuizzInfo((await axios.get('http://localhost:8000/quizz_info/'+props.match.params.id)).data);
     }
 
+    async function getAnswers() {
+        setAnswers((await axios.get('http://localhost:8000/answers/'+props.match.params.id)).data);
+    }
+
     useEffect(() => {
         getQuestions();
         getQuizzInfo();
+        getAnswers();
     }, []);
 
     let quizzName = "Loading...";
-    
+
     if(quizzInfo.length > 0) {
         quizzName = quizzInfo[0].name;
     }
@@ -38,9 +44,8 @@ export default function QuizzManager(props) {
         );
     } else {
         return (
-            <Quizz questions={questions} />
+            <Quizz quizzInfo={quizzInfo} questions={questions} answers={answers}/>
         )
     }
-
 
 }

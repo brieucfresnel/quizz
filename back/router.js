@@ -42,7 +42,7 @@ router.get('/quizz/:id', (req, res) => {
 });
 
 // Quizz Answers //
-router.get('answers/:id', (req, res) => {
+router.get('/answers/:id', (req, res) => {
   quizz.answers(req, res);
 });
 

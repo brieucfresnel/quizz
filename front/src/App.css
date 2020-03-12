@@ -17,6 +17,15 @@ body {
     border-radius: 0px 0px 40px 40px;
 }
 
+.main-top-bar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-top-bar .icon {
+    margin: 0 2rem;
+}
+
 .top-bar h1{
     display: inline-block;
     color: #000;
@@ -30,7 +39,7 @@ body {
     margin-top: .1rem;
 }
 
-.top-bar .icon {
+.home-top-bar .icon {
     position: absolute;
     right: 2rem;
 }
@@ -185,6 +194,7 @@ body {
 .quizz-info {
     text-align: center;
     color: #fff;
+    margin: 0 2rem;
 }
 
 .quizz-name {
@@ -281,4 +291,78 @@ body {
 
 .quizz-answers li:first-child {
     margin-top: 0;
+}
+
+/* Quizz Finished */
+
+.quizz-end-wrapper .quizz-header {
+    overflow: visible;
+}
+
+.quizz-end-wrapper .quizz-header > div:first-child {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    overflow: hidden;
+}
+
+.quizz-end-wrapper .quizz-header-img {
+    border-radius: 0 0 15px 15px;
+}
+
+.quizz-end-header-content {
+    text-align: center;
+    font-size: 1.2rem;
+    margin: 3rem 0 0 0;
+    color: #fff;
+}
+
+.quizz-end-score div {
+    margin-top: .3rem;
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+
+.quizz-end-header-bottom {
+    background: #484E51;
+}
+
+.quizz-end-header-btns {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    bottom: -2rem;
+}
+
+.quizz-end-header-btn a {
+    display: block;
+}
+
+.quizz-end-header-btn {
+    margin-left: 1rem;
+    background: #1F262A;
+    padding: .8rem 2rem;
+    border-radius: 15px;
+    border: 2px solid #FC6076;
+}
+
+.quizz-end-header-btn img {
+    width: 25px;
+    height: auto;
+}
+
+.quizz-end-header-btns a:first-child {
+    margin-left: 0;
+}
+
+.quizz-end-wrapper .quizz-name {
+    margin-top: 3rem;
+}
+
+.quizz-end-rate {
+    padding: 1rem;
+    border-radius: 15px;
+    background: #1F262A;
+    margin:  2rem;
+    color: #fff;
+    text-align: center;
 }
