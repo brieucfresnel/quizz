@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import TopBar from './TopBar';
 
 export default function NewQuizzForm(props) {
 
@@ -9,9 +10,10 @@ export default function NewQuizzForm(props) {
         case 'quizzInfo':
             return (
                 <div className="newQuizzForm">
+                    <TopBar />
                     <h1>Créez votre propre quizz</h1>
                     <form className="quizzInfoForm">
-                        <input type="text" name="quizzName" required/>
+                        <input type="text" name="quizzName" placeholder="Nom du quizz" required/>
                         <input type="file" name="quizzImage" required/>
                         <select name="quizzCategory" required>
                             <option value="webdesign">Web Design</option>
@@ -21,7 +23,7 @@ export default function NewQuizzForm(props) {
                         </select>
                     </form>
                     <div className="bot-bar">
-                        <div className="control-btn">
+                        <div className="control-btn" onClick={(e) => setCurrPageTitle('questionType')}>
                             SUIVANT
                         </div>
                     </div>
@@ -32,13 +34,26 @@ export default function NewQuizzForm(props) {
             // show questions if there are any + delete btn
             // choose question type: video or text
             return (
+
                 <div className="newQuizzForm">
+                <TopBar />
                     <h1>Vos questions</h1>
                     <div className="choose-questionType">
                         <div>Quel type de question souhaitez-vous ajouter ?</div>
-                        <div className="questionType-block">
-                            <div>Question textuelle</div>
-                            <img src={process.env.PUBLIC_URL + "/img/icons/icon_search.png"}/>
+                        <div className="questionType-blocks">
+                            <div className="questionType-block">
+                                <div>Question textuelle</div>
+                                <img src={process.env.PUBLIC_URL + "/img/icons/icon_text.png"}/>
+                            </div>
+                            <div className="questionType-block">
+                                <div>Question textuelle</div>
+                                <img src={process.env.PUBLIC_URL + "/img/icons/icon_play_2.png"}/>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="bot-bar">
+                        <div className="control-btn" onClick={(e) => setCurrPageTitle('textQuestion')}>
+                            SUIVANT
                         </div>
                     </div>
                 </div>
@@ -49,6 +64,7 @@ export default function NewQuizzForm(props) {
             return (
                 <div className="newQuizzForm">
                     <h1>Question 1</h1>
+                    textQuestion
                 </div>
             );
             break;

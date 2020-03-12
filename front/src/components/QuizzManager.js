@@ -12,6 +12,7 @@ export default function QuizzManager(props) {
     let [questions, setQuestions] = useState({});
     let [answers, setAnswers] = useState([]);
     let [quizzInfo, setQuizzInfo] = useState({});
+    let [creatorName, setCreatorName] = useState('Loading...');
     let [showQuizz, setShowQuizz] = useState(false);
 
     async function getQuestions() {
@@ -26,10 +27,15 @@ export default function QuizzManager(props) {
         setAnswers((await axios.get('http://localhost:8000/answers/'+props.match.params.id)).data);
     }
 
+    async function getCreatorName() {
+        setCreatorName((await axios.get('http://localhost:8000/user/'+quizzInfo.creator_id)).data);
+    }
+
     useEffect(() => {
         getQuestions();
         getQuizzInfo();
         getAnswers();
+        getCreatorName();
     }, []);
 
     let quizzName = "Loading...";
@@ -40,11 +46,11 @@ export default function QuizzManager(props) {
 
     if(!showQuizz) {
         return (
-            <QuizzLauncher quizzName={quizzName} quizzInfo={quizzInfo} setShowQuizz={setShowQuizz}/>
+            <QuizzLauncher creatorName={creatorName} quizzName={quizzName} quizzInfo={quizzInfo} setShowQuizz={setShowQuizz}/>
         );
     } else {
         return (
-            <Quizz quizzInfo={quizzInfo} questions={questions} answers={answers}/>
+            <Quizz creatorName={creatorName} quizzInfo={quizzInfo} questions={questions} answers={answers}/>
         )
     }
 
