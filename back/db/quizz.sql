@@ -62,6 +62,9 @@ CREATE TABLE scores (
   score INTEGER
 );
 
+
+
+
 INSERT INTO category (name)
 VALUES
    ("Webdesign"),
@@ -73,12 +76,27 @@ INSERT INTO users (login, password, picture_url, remember)
 VALUES
    ("ADMIN", "ADMIN", "", 0);
 
+INSERT INTO vote (user_id, quizz_id, vote)
+VALUES
+  (1, 1, 2.5),
+  (1, 2, 2.5),
+  (1, 3, 2.5),
+  (1, 4, 2.5);
+
+INSERT INTO score (quizz_id, user_id,  score)
+  VALUES
+    (1, 1, 5),
+    (2, 1, 5),
+    (3, 1, 5),
+    (4, 1, 5);
+
+
 INSERT INTO quizz (creator_id, name, picture_url,category, difficulty, creation_date)
 VALUES
-   (0, "C'est quoi le webdesign ?","quizz01.jpg", 0, 1, 0),
-   (0, "Les bases du motion design ?","quizz01.jpg", 1, 1, 0),
-   (0, "C'est quoi le game design ?","quizz01.jpg", 2, 1, 0),
-   (0, "Les bases du print.","quizz01.jpg", 3, 1, 0);
+   (1, "C'est quoi le webdesign ?","quizz01.jpg", 0, 1, 0),
+   (1, "Les bases du motion design ?","quizz01.jpg", 1, 1, 0),
+   (1, "C'est quoi le game design ?","quizz01.jpg", 2, 1, 0),
+   (1, "Les bases du print.","quizz01.jpg", 3, 1, 0);
 
 INSERT INTO questions (quizz_id, sentence, video_url, score, category)
 VALUES
