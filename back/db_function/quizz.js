@@ -59,7 +59,7 @@ function create(req, res){
         }
       }
     );
-    res.json("Quizz "+ req.body.name +" crée");
+    res.json({"Quizz "+ req.body.name +" crée"});
   }else{
     res.json("Il manque un parametre");
   }
@@ -70,7 +70,7 @@ function create_question(req, res){
   let find_id;
   db.run(
     "INSERT INTO questions (quizz_id, sentence, video_url, score, category) VALUES (?,?,?,?,?)",
-    [req.body.quizz_id, req.body.sentence, req.body.video_url, req.body.score, req.body.cathegory]
+    [req.body.quizz_id, req.body.sentence, req.body.video_url, req.body.score, req.body.category]
   );
   res.json('ok!');
 }

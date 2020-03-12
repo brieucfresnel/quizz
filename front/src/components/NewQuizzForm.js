@@ -15,7 +15,39 @@ export default function NewQuizzForm(props) {
     }
 
     function sendQuizz() {
-        // Need to check which answer is true then put all data in object and post it 
+        // Need to check which answer is true then put all data in object and post it
+        let quizzToSend = {
+            'creator_id': ,
+            'name': ,
+            'picture_url': ,
+            'category': ,
+            'difficulty':
+        }
+
+        let questionToSend = {
+            'quizz_id': ,
+            'sentence': ,
+            'video_url': ,
+            'score': ,
+            'category':
+        }
+
+        let answersToSend = {
+            'question_id': ,
+
+            'answersO1sentence': ,
+            'answers01solution': ,
+
+            'answers02sentence': ,
+            'answers02solution': ,
+
+            'answers03sentence': ,
+            'answers03solution': ,
+            
+            'answers04sentence': ,
+            'answers04solution': ,
+        }
+
     }
 
     switch(currPageTitle) {
