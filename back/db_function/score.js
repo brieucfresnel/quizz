@@ -7,74 +7,49 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('./db/quizz');
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////// Quizz /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////// Scores /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Quizz List //
-function list(req, res){
-  db.all( "SELECT * FROM quizz", (err, rows) => {
+// All scores //
+function all(req, res) {
+  db.all( "SELECT * FROM scores", (err, rows) => {
     res.json(rows);
   });
 }
 
-// Particular Quizz Informations //
-function info(req, res){
-  db.all('SELECT * FROM quizz LEFT JOIN scores ON scores.quizz_id = quizz.id WHERE quizz.id=?', [req.params.id] , (err, rows) => {
-    if (err) {
-      res.json(err);
-    }
+// Scores of a particular quizz //
+function quizz(req, res) {
+  db.all( "SELECT * FROM scores WHERE quizz_id = ?", [req.params.id], (err, rows) => {
     res.json(rows);
   });
 }
 
-// Quizz Questions //
-function questions(req, res){
-  db.all('SELECT * FROM questions WHERE quizz_id=?', [req.params.id] , (err, rows) => {
-    if (err) {
-      res.json(err);
-    }
+// Best scores of a particular quizz //
+function quizzLeaderboard(req, res) {
+    db.all( "SELECT score, login FROM scores LEFT JOIN users ON scores.user_id = users.id WHERE quizz_id = ? ORDER BY score DESC LIMIT 3", [req.params.id], (err, rows) => {
+      res.json(rows);
+    });
+}
+
+// Scores of a particular user //
+function user(req, res) {
+  db.all( "SELECT * FROM scores WHERE user_id = ?", [req.params.id], (err, rows) => {
     res.json(rows);
   });
 }
 
-// Quizz Answers //
-function answers(req, res){
-  db.all('SELECT answers.question_id,answers.solution,answers.sentence,answers.picture_url FROM answers JOIN questions ON questions.id = answers.question_id WHERE questions.quizz_id=?', [req.params.id] , (err, rows) => {
-    if (err) {
-      res.json(err);
-    }
+// Score of a particular user for a giver quizz//
+function userQuizz(req, res) {
+    db.get( "SELECT * FROM scores WHERE user_id = ? AND quizz_id = ? ", [req.params.user_id, req.params.quizz_id], (err, rows) => {
+      res.json(rows);
+    });
+}
+
+// Add Score //
+function add(req, res) {
+  db.run( "INSERT INTO score (users_id, quizz_id, score) VALUES (?, ?, ?)", [req.params.user_id, req.params.quizz_id, req.params.score], (err, rows) => {
     res.json(rows);
   });
 }
 
-// Create Quizz //
-function create(req, res){
-  if ( req.body.name ){
-    db.run(
-      "INSERT INTO quizz (creator_id, name, picture_url, category, difficulty, creation_date) VALUES (?,?,?,?,?,?)",
-      [req.body.creator_id, req.body.name, req.body.picture_url, req.body.category, req.body.difficulty, req.body.creation_date],
-      function(err){
-        if (err) {
-          res.json(err.message);
-        }
-      }
-    );
-    res.json("Quizz "+ req.body.name +" crée");
-  }else{
-    res.json("Pas de name " + req.body.name);
-  }
-}
-
-// Delete Quizz //
-function drop(req, res){
-    db.run('DELETE FROM answers WHERE question_id IN (SELECT id FROM questions WHERE quizz_id = ?)', [req.params.id],
-    function(rows,err) {
-      db.run('DELETE FROM questions WHERE quizz_id = ?', [req.params.id], function(rows,err) {
-        db.run('DELETE FROM quizz WHERE id = ?', [req.params.id]);
-      })
-      res.json(err);
-    }
-  );
-}
-
-module.exports = {list,info,questions,answers,create,drop};
+module.exports = {all,quizz,quizzLeaderboard,user,userQuizz};
