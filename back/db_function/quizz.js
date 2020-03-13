@@ -54,12 +54,13 @@ function create(req, res){
       "INSERT INTO quizz (creator_id, name, picture_url, category, difficulty, creation_date) VALUES (?,?,?,?,?,?)",
       [req.body.creator_id, req.body.name, req.body.picture_url, req.body.category, req.body.difficulty, 0],
       function(err){
+
         if (err) {
           res.json(err.message);
         }
       }
     );
-    res.json("Quizz "+ req.body.name +" crée");
+      res.json({'quizzID': db.lastInsertRowId});
   }else{
     res.json({'quizzID': db.lastInsertRowId});
   }

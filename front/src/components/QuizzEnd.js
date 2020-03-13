@@ -36,11 +36,6 @@ export default function QuizzEnd(props) {
 
             <div className="quizz-info">
                 <h1 className="quizz-name">{props.quizzName}</h1>
-                <div className="quizz-author">Créé par OIEZQHFDVSHZ</div>
-            </div>
-
-            <div className="quizz-end-rate">
-                Donnez une note à ce quizz
             </div>
 
             <BotBar/>

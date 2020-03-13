@@ -293,6 +293,12 @@ body {
 .quizz-answers {
     list-style: none;
     padding: 0;
+    overflow: hidden;
+}
+
+.quizz-answers img {
+    width: 100%;
+    height: auto;
 }
 
 .quizz-answers li {
@@ -502,4 +508,8 @@ body {
 
 .newQuizzForm input[type="checkbox"]:checked {
     background: #FF9A44;
+}
+
+.quizz-answers li:last-child {
+    margin-bottom: 3rem;
 }

@@ -14,31 +14,40 @@ export default function NewQuizzForm(props) {
     let textAnswers = [];
     let imgAnswers = {}
     let pageToShow = '';
+    let count = 0;
 
     function setQuestionType() {
         setCurrPageTitle('textQuestion');
     }
 
     async function sendAll() {
-        let quizzID = sendQuizz();
+        let quizzToSend = {
+            'creator_id': 1,
+            'name': quizzName,
+            'picture_url': '/quizz/webdesign.jpg',
+            'category': quizzCategory,
+            'difficulty': 1
+        }
+
+        let quizzID = sendQuizz(quizzToSend);
         let questionID = sendQuestion(quizzID);
         sendAnswers(questionID);
     }
 
     async function sendQuestion(quizzID) {
-        let questionToSend = {};
-        // let questionToSend = {
-        //     'quizz_id': quizzID,
-        //     'sentence': ,
-        //     'video_url': ,
-        //     'score': ,
-        //     'category':
-        // }
+        let questionToSend = {
+            'quizz_id': quizzID,
+            'sentence': currQuestion.sentence,
+            'video_url': '',
+            'score': 0,
+            'category': quizzCategory
+        }
 
-        setCurrQuestion((await axios.post('http://localhost:8000/question', questionToSend)).data);
-        console.log(currQuestion.questionID);
-
-        return currQuestion.questionID;
+        (await axios.post('http://localhost:8000/question', questionToSend)).then(function(response) {
+            setCurrQuestion(response);
+            console.log(response);
+            return currQuestion;
+        });
     }
 
     async function sendAnswers(questionID) {
@@ -60,20 +69,23 @@ export default function NewQuizzForm(props) {
         }
     }
 
-    async function sendQuizz() {
-        // Need to check which answer is true then put all data in object and post it
-        let quizzToSend = {
-            'creator_id': 1,
-            'name': quizzName,
-            'picture_url': '/quizz/webdesign.jpg',
-            'category': quizzCategory,
-            'difficulty': 1
+    function choosePage() {
+        if(count < 2) {
+            setCurrPageTitle('questionType');
+        } else {
+            sendQuizz();
         }
+    }
 
-        (await axios.post('http://localhost:8000/quizz', quizzToSend)).then(function(response) {
+    async function sendQuizz(quizzToSend) {
+        // Need to check which answer is true then put all data in object and post it
+
+
+        (await axios.post('http://localhost:8000/quizz', quizzToSend).then(function(response) {
             setQuizz(response);
             return quizz.quizzID;
-        });
+            console.log(quizz.quizzID);
+        }));
     }
 
     switch(currPageTitle) {
@@ -135,9 +147,10 @@ export default function NewQuizzForm(props) {
 
         case 'textQuestion':
             // input question, choose answer type
-            console.log(textAnswers);
+            count++;
             return (
                 <div className="newQuizzForm">
+                    <TopBar />
                     <h1>Question {currQuestionIndex+1}</h1>
                     <div className="newQuizzForm-question">
 
@@ -148,22 +161,7 @@ export default function NewQuizzForm(props) {
                             <input onChange={(e) => textAnswers[0] = e.target.value} className="newQuizzForm-answer" type="text" name="answer_1" placeholder="Réponse A" required/>
                             <input type="checkbox" name="answer_1_checkbox"/>
                         </div>
-                        <div className="newQuizzForm-answer-c        let answersToSend = {
-
-            'question_id': ,
-
-            'answersO1sentence': textAnswers[0],
-            'answers01solution': 0,
-
-            'answers02sentence': textAnswers[1],
-            'answers02solution': 0,
-
-            'answers03sentence': textAnswers[2],
-            'answers03solution': 0,
-
-            'answers04sentence': textAnswers[3],
-            'answers04solution': 0,
-        }ontainer">
+                        <div className="newQuizzForm-answer-container">
                             <input onChange={(e) => textAnswers[1] = e.target.value} className="newQuizzForm-answer" type="text" name="answer_1" placeholder="Réponse A" required/>
                             <input type="checkbox" name="answer_1_checkbox"/>
                         </div>
@@ -177,9 +175,9 @@ export default function NewQuizzForm(props) {
                         </div>
                     </div>
 
-                    <div className="addQuestion-btn"  onClick={(e) => setCurrPageTitle('textQuestion')}>Add another question</div>
+                    <button className="addQuestion-btn" onClick={(e) => setCurrPageTitle('questionType')}>Add another question</button>
                     <div className="bot-bar">
-                        <div className="control-btn" onClick={(e) => sendQuizz()}>
+                        <div className="control-btn" onClick={choosePage}>
                             VALIDER
                         </div>
                     </div>
