@@ -1,53 +1,79 @@
 import React, {useState} from 'react';
 import TopBar from './TopBar';
+import axios from 'axios';
 
 export default function NewQuizzForm(props) {
 
     let [currPageTitle, setCurrPageTitle] = useState('quizzInfo');
     let [quizzName, quizzImage, quizzCategory, questionType, answersType] = '';
+
+    let [quizz, setQuizz] = useState({'id': 1});
+    let [currQuestion, setCurrQuestion] = useState({});
+
     let currQuestionIndex = 0;
     let textAnswers = [];
     let imgAnswers = {}
     let pageToShow = '';
 
     function setQuestionType() {
-        setCurrPageTitle('textQuestion')
+        setCurrPageTitle('textQuestion');
     }
 
-    function sendQuizz() {
+    async function sendAll() {
+        let quizzID = sendQuizz();
+        let questionID = sendQuestion(quizzID);
+        sendAnswers(questionID);
+    }
+
+    async function sendQuestion(quizzID) {
+        let questionToSend = {};
+        // let questionToSend = {
+        //     'quizz_id': quizzID,
+        //     'sentence': ,
+        //     'video_url': ,
+        //     'score': ,
+        //     'category':
+        // }
+
+        setCurrQuestion((await axios.post('http://localhost:8000/question', questionToSend)).data);
+        console.log(currQuestion.questionID);
+
+        return currQuestion.questionID;
+    }
+
+    async function sendAnswers(questionID) {
+        let answersToSend = {
+
+            'question_id': questionID,
+
+            'answersO1sentence': textAnswers[0],
+            'answers01solution': 0,
+
+            'answers02sentence': textAnswers[1],
+            'answers02solution': 0,
+
+            'answers03sentence': textAnswers[2],
+            'answers03solution': 0,
+
+            'answers04sentence': textAnswers[3],
+            'answers04solution': 0,
+        }
+    }
+
+    async function sendQuizz() {
         // Need to check which answer is true then put all data in object and post it
         let quizzToSend = {
-            'creator_id': ,
-            'name': ,
-            'picture_url': ,
-            'category': ,
-            'difficulty':
+            'creator_id': 1,
+            'name': quizzName,
+            'picture_url': '/quizz/webdesign.jpg',
+            'category': quizzCategory,
+            'difficulty': 1
         }
 
-        let questionToSend = {
-            'quizz_id': ,
-            'sentence': ,
-            'video_url': ,
-            'score': ,
-            'category':
-        }
-
-        let answersToSend = {
-            'question_id': ,
-
-            'answersO1sentence': ,
-            'answers01solution': ,
-
-            'answers02sentence': ,
-            'answers02solution': ,
-
-            'answers03sentence': ,
-            'answers03solution': ,
-            
-            'answers04sentence': ,
-            'answers04solution': ,
-        }
-
+        (await axios.post('http://localhost:8000/quizz', quizzToSend)).then(function(response) {
+            setQuizz(response);
+            return quizz.quizzID;
+        });
     }
 
     switch(currPageTitle) {
@@ -64,10 +90,10 @@ export default function NewQuizzForm(props) {
                         <input type="file" name="quizzImage" required/>
                         <select onChange={(e) => quizzCategory = e.target.value} name="quizzCategory" required>
                             <option value="">Catégorie</option>
-                            <option value="webdesign" >Web Design</option>
-                            <option value="motiondesign">Motion Design</option>
-                            <option value="gamedesign">Game Design</option>
-                            <option value="print">Print</option>
+                            <option value="Web Design" >Web Design</option>
+                            <option value="Motion Design">Motion Design</option>
+                            <option value="Game Design">Game Design</option>
+                            <option value="Print">Print</option>
                         </select>
                     </form>
                     <div className="bot-bar">
@@ -114,7 +140,7 @@ export default function NewQuizzForm(props) {
                 <div className="newQuizzForm">
                     <h1>Question {currQuestionIndex+1}</h1>
                     <div className="newQuizzForm-question">
-                        {}
+
                     </div>
                     <div className="newQuizzForm-info">Saissez les réponses et cochez celle qui est vraie</div>
                     <div className="newQuizzForm-answers">
@@ -122,7 +148,22 @@ export default function NewQuizzForm(props) {
                             <input onChange={(e) => textAnswers[0] = e.target.value} className="newQuizzForm-answer" type="text" name="answer_1" placeholder="Réponse A" required/>
                             <input type="checkbox" name="answer_1_checkbox"/>
                         </div>
-                        <div className="newQuizzForm-answer-container">
+                        <div className="newQuizzForm-answer-c        let answersToSend = {
+
+            'question_id': ,
+
+            'answersO1sentence': textAnswers[0],
+            'answers01solution': 0,
+
+            'answers02sentence': textAnswers[1],
+            'answers02solution': 0,
+
+            'answers03sentence': textAnswers[2],
+            'answers03solution': 0,
+
+            'answers04sentence': textAnswers[3],
+            'answers04solution': 0,
+        }ontainer">
                             <input onChange={(e) => textAnswers[1] = e.target.value} className="newQuizzForm-answer" type="text" name="answer_1" placeholder="Réponse A" required/>
                             <input type="checkbox" name="answer_1_checkbox"/>
                         </div>
@@ -135,6 +176,8 @@ export default function NewQuizzForm(props) {
                             <input type="checkbox" name="answer_1_checkbox"/>
                         </div>
                     </div>
+
+                    <div className="addQuestion-btn"  onClick={(e) => setCurrPageTitle('textQuestion')}>Add another question</div>
                     <div className="bot-bar">
                         <div className="control-btn" onClick={(e) => sendQuizz()}>
                             VALIDER

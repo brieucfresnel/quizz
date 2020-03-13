@@ -59,9 +59,9 @@ function create(req, res){
         }
       }
     );
-    res.json({"Quizz "+ req.body.name +" crée"});
+    res.json("Quizz "+ req.body.name +" crée");
   }else{
-    res.json("Il manque un parametre");
+    res.json({'quizzID': db.lastInsertRowId});
   }
 }
 
@@ -72,7 +72,7 @@ function create_question(req, res){
     "INSERT INTO questions (quizz_id, sentence, video_url, score, category) VALUES (?,?,?,?,?)",
     [req.body.quizz_id, req.body.sentence, req.body.video_url, req.body.score, req.body.category]
   );
-  res.json('ok!');
+  res.json({'questionID': db.lastInsertRowId});
 }
 
 // Create Answers //
